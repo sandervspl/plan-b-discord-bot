@@ -3,6 +3,4 @@
 dist/
 node_modules/
 
-Procfile
-herokugit
-src/config/secret.ts
+.secretenv

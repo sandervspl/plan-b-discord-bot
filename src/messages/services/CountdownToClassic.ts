@@ -7,7 +7,7 @@ type Channel = Discord.TextChannel | Discord.DMChannel | Discord.GroupDMChannel;
 
 export class CountdownToClassic extends Message {
   private static started = false;
-  private releaseDate = dayjs('2019-08-27');;
+  private releaseDate = dayjs('2019-08-27');
 
   constructor(discordClient: Discord.Client) {
     super(discordClient, 'countdown');

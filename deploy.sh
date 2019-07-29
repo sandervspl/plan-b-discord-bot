@@ -10,7 +10,7 @@ PROD_PORT=5000
 APP_ENV=production
 
 #Don't touch this
-ENV=$1
+ENV=PROD
 
 #!/bin/bash
 
@@ -24,14 +24,7 @@ c='\033[1m'
 nc='\033[0m'
 red='\033[1;31m'
 
-#Checks if correct arguments are given
-if [ "$1" != PROD ]
-then
-    echo -e "🚫 $c Missing environment: PROD $nc"
-    exit
-else
-    echo -e "🚀 $c Deploying $PROJECT for $1 $nc"
-fi
+echo -e "🚀 $c Deploying $PROJECT for PROD $nc"
 
 #Check with user for version
 git fetch --tags
@@ -95,9 +88,7 @@ echo -e "🔑 $c Connecting to $HOST $nc"
 #Set-up new files, install packages and run server
 ssh $USER@$HOST << EOF
     echo -e "🐶 $c Initializing server $nc"
-    if [ "$1" = TEST ]; then
-        rm -rf $PDIR*
-    fi
+    rm -rf $PDIR*
     mkdir -p $PDIR-$VERSION;
     chown $USER:$USER $PDIR-$VERSION;
     chown $USER:$USER /var/api;

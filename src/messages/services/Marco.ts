@@ -1,12 +1,12 @@
 import Discord from 'discord.js';
 import Message from '../Message';
 
-export class Ping extends Message {
+export class Marco extends Message {
   constructor(discordClient: Discord.Client) {
-    super(discordClient, 'ping');
+    super(discordClient, 'marco');
 
     this.onMessage((msg) => {
-      msg.reply('Pong!');
+      msg.channel.send('Polo!');
     });
   }
 }

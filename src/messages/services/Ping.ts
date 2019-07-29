@@ -6,7 +6,9 @@ export class Ping extends Message {
     super(discordClient, 'ping');
 
     this.onMessage((msg) => {
-      msg.reply('Pong!');
+      if (msg.author.id === '77783102469967872') { // Misa
+        msg.reply('Pong!');
+      }
     });
   }
 }

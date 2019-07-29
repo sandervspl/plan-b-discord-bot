@@ -4,11 +4,6 @@ import messages from './messages';
 class DiscordBot {
   public readonly client = new Discord.Client();
 
-  private channels = {
-    general: '497799504540598282',
-    testing: '561859968681115658',
-  }
-
   constructor() {
     this.client.login(process.env.BOT_TOKEN);
 
@@ -17,7 +12,6 @@ class DiscordBot {
     });
 
     this.initMessageServices();
-
   }
 
   private initMessageServices = () => {

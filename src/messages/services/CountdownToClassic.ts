@@ -3,66 +3,58 @@ import dayjs from 'dayjs';
 import { CronJob } from 'cron';
 import Message from '../Message';
 
+type Channel = Discord.TextChannel | Discord.DMChannel | Discord.GroupDMChannel;
+
 export class CountdownToClassic extends Message {
-  static started = false;
+  private static started = false;
+  private releaseDate = dayjs('2019-08-27');;
 
   constructor(discordClient: Discord.Client) {
     super(discordClient, 'countdown');
 
-    this.onMessage((msg) => {
+    this.onMessage(async (msg) => {
+      // Send DM to starter
+      const dm = await msg.author.createDM();
+
       if (!CountdownToClassic.started) {
-        msg.channel.send('Countdown to Classic release started!');
+        dm.send('Countdown to Classic release started!');
 
         this.initCountdown(msg.channel);
       } else {
-        // @TODO show days until release
-        msg.channel.send('Countdown to Classic has already started.');
+        await dm.send('Countdown to Classic has already started.');
+        await dm.send(`Days until release: ${this.getDiff('day')}`);
       }
     });
   }
 
-  private getDiffDays = () => {
-    const releaseDate = dayjs('2019-08-27');
+  private getDiff = (unitType: dayjs.QUnitType) => {
     const now = new Date();
 
-    return dayjs(releaseDate).diff(now, 'day');
+    return dayjs(this.releaseDate).diff(now, unitType);
   }
 
-  private getDiffHours = () => {
-    const releaseDate = dayjs('2019-08-27');
-    const now = new Date();
+  private generateCountdownCronJob = (channel: Channel) => (cronTime: string, unitType: dayjs.QUnitType) => {
+    const onTick = () => {
+      const diff = this.getDiff(unitType);
+      const plural = diff !== 1 ? 's' : '';
 
-    return dayjs(releaseDate).diff(now, 'hour');
+      channel.send(`⏰ ${diff} ${unitType}${plural} until Classic release!`);
+    };
+
+    return new CronJob(cronTime, onTick, undefined, true, 'Europe/Amsterdam');
   }
 
-  private getDiffMins = () => {
-    const releaseDate = dayjs('2019-08-27');
-    const now = new Date();
+  private initCountdown = (channel: Channel) => {
+    const cronJob = this.generateCountdownCronJob(channel);
 
-    return dayjs(releaseDate).diff(now, 'minute');
-  }
-
-  private initCountdown = (channel: Discord.TextChannel | Discord.DMChannel | Discord.GroupDMChannel) => {
     // Until the 25th of August, every 07:00 hour
-    const cronCountdownDays = new CronJob('0 0 7 1-25 0-7 *', () => {
-      const diff = this.getDiffDays();
-
-      channel.send(`⏰ ${diff} day${diff !== 1 ? 's' : ''} until Classic release!`);
-    }, undefined, true, 'Europe/Amsterdam');
+    const cronCountdownDays = cronJob('0 0 7 1-25 0-7 *', 'day');
 
     // On 26th of August, every hour on the clock
-    const cronCountdownHours = new CronJob('0 0 0-23 26 7 *', () => {
-      const diff = this.getDiffHours();
-
-      channel.send(`⏰ ${diff} hour${diff !== 1 ? 's' : ''} until Classic release!`);
-    }, undefined, true, 'Europe/Amsterdam');
+    const cronCountdownHours = cronJob('0 0 0-23 26 7 *', 'hour');
 
     // On 26th of August, every minute from 23:50 to 23:59
-    const cronCountdownMinutes = new CronJob('0 50-59 23 26 7 *', () => {
-      const diff = this.getDiffMins();
-
-      channel.send(`⏰ ${diff} minute${diff !== 1 ? 's' : ''} until Classic release!`);
-    }, undefined, true, 'Europe/Amsterdam');
+    const cronCountdownMinutes = cronJob('0 50-59 23 26 7 *', 'minute');
 
     // On 27th of August, at 00:00:00, stop the countdown cron jobs
     new CronJob('0 0 0 27 7 *', () => {
@@ -72,10 +64,6 @@ export class CountdownToClassic extends Message {
 
       channel.send('Classic is live! Have fun fuckers!!!');
     }, undefined, true, 'Europe/Amsterdam');
-
-    const diff = this.getDiffDays();
-
-    channel.send(`⏰ ${diff} day${diff !== 1 ? 's' : ''} until Classic release!`);
 
     CountdownToClassic.started = true;
   }

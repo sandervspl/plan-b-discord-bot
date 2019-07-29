@@ -1,5 +1,5 @@
-import { Ping } from './Ping';
-import { CountdownToClassic } from './CountdownToClassic';
+import { Ping } from './services/Ping';
+import { CountdownToClassic } from './services/CountdownToClassic';
 
 export default [
   Ping,

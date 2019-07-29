@@ -1,7 +1,7 @@
 import Discord from 'discord.js';
 import dayjs from 'dayjs';
 import { CronJob } from 'cron';
-import Message from './Message';
+import Message from '../Message';
 
 export class CountdownToClassic extends Message {
   static started = false;

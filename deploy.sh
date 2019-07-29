@@ -3,9 +3,10 @@ PROJECT='discord-bot'
 
 ROOT_USER=root
 
-PROD_HOST=134.209.85.102
-PROD_USER=sandervspl
-PROD_PORT=5000
+HOST=134.209.85.102
+USER=sandervspl
+PORT=5000
+INSTANCES=1
 
 APP_ENV=production
 
@@ -31,13 +32,13 @@ git fetch --tags
 BUMP=false
 VERSION=$(git describe --abbrev=0 --tags)
 
-if [ "$2" = "1" ]; then
+if [ "$1" = "1" ]; then
     BUMP=major;
-elif [ "$2" = "2" ]; then
+elif [ "$1" = "2" ]; then
     BUMP=minor;
-elif [ "$2" = "3" ]; then
+elif [ "$1" = "3" ]; then
     BUMP=patch;
-elif [ "$2" = "4" ]; then
+elif [ "$1" = "4" ]; then
     BUMP=false;
 else
     echo "Current version is: $VERSION - Do you want to update?"

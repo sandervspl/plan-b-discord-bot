@@ -1,0 +1,37 @@
+{
+  "name": "plan-b-discord-bot",
+  "version": "0.0.1",
+  "description": "Code for plan-b discord bot",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ts-node-dev --respawn --transpileOnly -r tsconfig-paths/register src/index.ts",
+    "build": "npm run clean && tsc",
+    "start": "node -r ./tsconfig-paths-bootstrap.js dist/index.js",
+    "clean": "rimraf dist/",
+    "lint": "eslint --ext .ts --ext .tsx src/"
+  },
+  "keywords": [],
+  "author": "Sander Vispoel <contact@sandervispoel.com>",
+  "license": "ISC",
+  "dependencies": {
+    "cron": "1.7.1",
+    "dayjs": "1.8.15",
+    "discord.js": "11.5.1",
+    "express": "4.17.1",
+    "tsconfig-paths": "3.8.0"
+  },
+  "devDependencies": {
+    "@types/cron": "1.7.1",
+    "@types/dotenv": "6.1.1",
+    "@types/express": "4.17.0",
+    "@types/node": "^9.4.7",
+    "@typescript-eslint/eslint-plugin": "1.7.0",
+    "@typescript-eslint/parser": "1.7.0",
+    "dotenv": "8.0.0",
+    "eslint": "5.16.0",
+    "eslint-plugin-import": "2.17.2",
+    "ts-node-dev": "1.0.0-pre.40",
+    "typescript": "3.5.3",
+    "typescript-eslint-parser": "22.0.0"
+  }
+}

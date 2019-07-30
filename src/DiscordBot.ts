@@ -1,5 +1,6 @@
 import Discord from 'discord.js';
-import messages from './messages';
+import messages from './messages/services';
+import services from './services';
 
 class DiscordBot {
   public readonly client = new Discord.Client();
@@ -9,9 +10,14 @@ class DiscordBot {
 
     this.client.on('ready', () => {
       console.info('Discord bot activated.');
-    });
 
-    this.initMessageServices();
+      this.initServices();
+      this.initMessageServices();
+    });
+  }
+
+  private initServices = () => {
+    services.forEach((services) => new services(this.client));
   }
 
   private initMessageServices = () => {

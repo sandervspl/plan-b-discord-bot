@@ -48,7 +48,7 @@ export class CountdownToClassic extends Message {
     const cronJob = this.generateCountdownCronJob(channel);
 
     // Until the 25th of August, every 07:00 hour
-    const cronCountdownDays = cronJob('0 0 7 1-25 0-7 *', 'day');
+    const cronCountdownDays = cronJob('0 0 7 * 0-7 *', 'day');
 
     // On 26th of August, every hour on the clock
     const cronCountdownHours = cronJob('0 0 0-23 26 7 *', 'hour');

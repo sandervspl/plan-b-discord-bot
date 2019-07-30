@@ -1,4 +1,5 @@
 import Discord from 'discord.js';
+import moment from 'moment';
 
 type MessageCallback = (msg: Discord.Message) => void;
 
@@ -12,14 +13,23 @@ export default abstract class Message {
   ) {}
 
   protected onMessage = (cb: MessageCallback) => this.client.on('message', (msg) => {
-    if (msg.content === `!${this.listen}`) {
+    const content = msg.content
+      .toLowerCase()
+      .trim();
+
+    if (content === `!${this.listen}`) {
       if (!this.cooldowns.has(this.listen)) {
         cb(msg);
-
-        this.cooldowns.set(this.listen, Date.now());
-
-        setTimeout(() => this.cooldowns.delete(this.listen), this.cooldown);
+        this.startCooldown();
       }
     }
   });
+
+  private startCooldown = () => {
+    const now = moment();
+
+    this.cooldowns.set(this.listen, now);
+
+    setTimeout(() => this.cooldowns.delete(this.listen), this.cooldown);
+  }
 }

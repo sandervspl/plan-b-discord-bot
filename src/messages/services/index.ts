@@ -6,4 +6,4 @@ export default [
   Ping,
   Release,
   Marco,
-];
+] as const;

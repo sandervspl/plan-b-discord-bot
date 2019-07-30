@@ -9,7 +9,8 @@ dotenv.config();
 dayjs.locale('en-gb');
 
 const app = express();
+const PORT_DEFAULT = 5000;
 
-app.listen(Number(process.env.PORT) || 5000, () => {
+app.listen(Number(process.env.PORT) || PORT_DEFAULT, () => {
   new DiscordBot();
 });

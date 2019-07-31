@@ -24,6 +24,10 @@ export default abstract class Message {
   ) {}
 
   protected onMessage = (cb: MessageCallback) => this.client.on('message', (msg) => {
+    if (env.isDevelopment && !this.isFromDeveloper(msg)) {
+      return;
+    }
+
     const content = msg.content
       .toLowerCase()
       .trim();
@@ -49,6 +53,10 @@ export default abstract class Message {
       this.startCooldown();
     }
   });
+
+  protected isFromDeveloper = (msg: Discord.Message) => {
+    return msg.author.id === '77783102469967872';
+  }
 
   protected getArgs = (content: string) => {
     return content.split(' ').slice(1);

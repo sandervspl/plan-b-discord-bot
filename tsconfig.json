@@ -9,7 +9,7 @@
         "strict": true,
         "baseUrl": "src",
         "paths": {
-            "types/*": ["types/*"]
+            "audio/*": ["audio/*"]
         },
         "lib": ["esnext"]
     },

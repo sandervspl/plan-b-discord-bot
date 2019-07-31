@@ -28,10 +28,12 @@ export default abstract class Message {
       return;
     }
 
+    // Clean up message
     const content = msg.content
       .toLowerCase()
       .trim();
 
+    // Check if message starts with the command prefix
     if (!msg.content.startsWith('!')) {
       return;
     }
@@ -39,6 +41,7 @@ export default abstract class Message {
     // Remove prefix
     const message = content.slice(1);
 
+    // Check if the message we received is the same as what we listen to
     if (message.startsWith(this.listen)) {
       if (!this.hasRequiredRole(msg)) {
         return;

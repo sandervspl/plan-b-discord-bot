@@ -1,15 +1,15 @@
 import path from 'path';
+import fs from 'fs';
 import Discord from 'discord.js';
 import Command from '../Command';
 
 export class Sound extends Command {
-  private readonly audioPathBase = path.resolve('static/audio');
-  private readonly files: Record<string, string> = {
-    ragnaros: `${this.audioPathBase}/RagnarosSpecialAttack01.wav`,
-    orby: `${this.audioPathBase}/fuckorby.mp3`,
-    kanker: `${this.audioPathBase}/kenkerintheass.mp3`,
-    '12': `${this.audioPathBase}/everybodylistentothe12yearold.mp3`,
-  }
+  private readonly files = fs
+    .readdirSync(path.resolve('static/audio'))
+    .reduce((prev, cur) => ({
+      ...prev,
+      [cur.split('.')[0]]: path.resolve('static/audio', cur),
+    }), {} as Record<string, string>);
 
   constructor(discordClient: Discord.Client) {
     super(discordClient, 'sound', { cooldown: 5000 });

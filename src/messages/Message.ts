@@ -1,6 +1,7 @@
 import Discord from 'discord.js';
 import moment from 'moment';
 import _ from 'lodash';
+import env from 'helpers/env';
 
 type MessageCallback = (msg: Discord.Message) => void;
 
@@ -27,7 +28,14 @@ export default abstract class Message {
       .toLowerCase()
       .trim();
 
-    if (content === `!${this.listen}`) {
+    if (!msg.content.startsWith('!')) {
+      return;
+    }
+
+    // Remove prefix
+    const message = content.slice(1);
+
+    if (message.startsWith(this.listen)) {
       if (!this.hasRequiredRole(msg)) {
         return;
       }
@@ -41,6 +49,11 @@ export default abstract class Message {
       this.startCooldown();
     }
   });
+
+  protected getArgs = (content: string) => {
+    return content.split(' ').slice(1);
+  }
+
 
   private hasRequiredRole = (msg: Discord.Message): boolean => {
     if (this.options.roles) {

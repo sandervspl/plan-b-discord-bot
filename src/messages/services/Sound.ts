@@ -12,10 +12,18 @@ export class Sound extends Message {
   }
 
   constructor(discordClient: Discord.Client) {
-    super(discordClient, 'sound');
+    super(discordClient, 'sound', { cooldown: 5000 });
 
     this.onMessage((msg) => {
       const [request] = this.getArgs(msg.content);
+
+      if (!request) {
+        const sortedFileCommands = Object.keys(this.files)
+          .sort()
+          .join(', ');
+
+        return msg.channel.send(`Available sound files: ${sortedFileCommands}`);
+      }
 
       if (!this.files[request]) {
         return msg.channel.send(`Could not find an audio clip for '${request}'`);

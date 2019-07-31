@@ -1,8 +1,8 @@
 import Discord from 'discord.js';
 import moment from 'moment';
-import Message from '../Message';
+import Command from '../Command';
 
-export class Release extends Message {
+export class Release extends Command {
   private releaseDate = moment('2019-08-27');
 
   constructor(discordClient: Discord.Client) {

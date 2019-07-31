@@ -1,7 +1,7 @@
 import Discord from 'discord.js';
-import Message from '../Message';
+import Command from '../Command';
 
-export class Marco extends Message {
+export class Marco extends Command {
   constructor(discordClient: Discord.Client) {
     super(discordClient, 'marco');
 

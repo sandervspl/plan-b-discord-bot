@@ -1,5 +1,5 @@
 import Discord from 'discord.js';
-import messages from './messages/services';
+import messages from './commands/services';
 import services from './services';
 
 class DiscordBot {

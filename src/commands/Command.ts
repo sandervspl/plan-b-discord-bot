@@ -12,7 +12,7 @@ type Options = {
   roles?: Roles[];
 }
 
-export default abstract class Message {
+export default abstract class Command {
   private cooldowns = new Discord.Collection();
 
   constructor(

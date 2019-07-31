@@ -1,8 +1,8 @@
 import path from 'path';
 import Discord from 'discord.js';
-import Message from '../Message';
+import Command from '../Command';
 
-export class Sound extends Message {
+export class Sound extends Command {
   private readonly audioPathBase = path.resolve('src/static/audio');
   private readonly files: Record<string, string> = {
     ragnaros: `${this.audioPathBase}/RagnarosSpecialAttack01.wav`,

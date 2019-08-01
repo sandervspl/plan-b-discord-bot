@@ -14,9 +14,7 @@ export class Sound extends Command {
   constructor(discordClient: Discord.Client) {
     super(discordClient, 'sound', { cooldown: 5000 });
 
-    this.onCommand((msg) => {
-      const [request] = this.getArgs(msg.content);
-
+    this.onCommand((msg, [request]) => {
       if (!request) {
         const sortedFileCommands = Object.keys(this.files)
           .sort()

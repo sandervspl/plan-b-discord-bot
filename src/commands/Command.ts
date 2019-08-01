@@ -2,15 +2,7 @@ import Discord from 'discord.js';
 import moment from 'moment';
 import _ from 'lodash';
 import env from 'helpers/env';
-
-type MessageCallback = (msg: Discord.Message) => void;
-
-type Roles = 'guild officer' | 'guild master' | 'bot' | 'discord admin';
-
-type Options = {
-  cooldown?: number;
-  roles?: Roles[];
-}
+import { Options, MessageCallback } from './types';
 
 export default abstract class Command {
   private cooldowns = new Discord.Collection();
@@ -51,17 +43,17 @@ export default abstract class Command {
         return;
       }
 
-      cb(msg);
+      cb(msg, this.getArgs(msg.content));
 
       this.startCooldown();
     }
   });
 
-  protected isFromDeveloper = (msg: Discord.Message) => {
+  protected isFromDeveloper = (msg: Discord.Message): boolean => {
     return msg.author.id === '77783102469967872';
   }
 
-  protected getArgs = (content: string) => {
+  protected getArgs = (content: string): string[] => {
     return content.split(' ').slice(1);
   }
 
@@ -83,7 +75,7 @@ export default abstract class Command {
     return true;
   }
 
-  private startCooldown = () => {
+  private startCooldown = (): void => {
     const now = moment();
 
     this.cooldowns.set(this.listen, now);

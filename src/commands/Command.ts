@@ -23,7 +23,7 @@ export default abstract class Command {
     },
   ) {}
 
-  protected onMessage = (cb: MessageCallback) => this.client.on('message', (msg) => {
+  protected onCommand = (cb: MessageCallback) => this.client.on('message', (msg) => {
     if (env.isDevelopment && !this.isFromDeveloper(msg)) {
       return;
     }

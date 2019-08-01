@@ -14,7 +14,7 @@ export class Sound extends Command {
   constructor(discordClient: Discord.Client) {
     super(discordClient, 'sound', { cooldown: 5000 });
 
-    this.onMessage((msg) => {
+    this.onCommand((msg) => {
       const [request] = this.getArgs(msg.content);
 
       if (!request) {

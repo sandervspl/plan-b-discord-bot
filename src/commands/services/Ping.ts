@@ -5,7 +5,7 @@ export class Ping extends Command {
   constructor(discordClient: Discord.Client) {
     super(discordClient, 'ping');
 
-    this.onMessage((msg) => {
+    this.onCommand((msg) => {
       msg.reply('Pong!');
     });
   }

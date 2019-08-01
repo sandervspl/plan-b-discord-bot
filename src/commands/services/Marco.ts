@@ -5,7 +5,7 @@ export class Marco extends Command {
   constructor(discordClient: Discord.Client) {
     super(discordClient, 'marco');
 
-    this.onMessage((msg) => {
+    this.onCommand((msg) => {
       msg.channel.send('Polo!');
     });
   }

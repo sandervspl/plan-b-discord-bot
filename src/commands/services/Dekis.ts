@@ -6,7 +6,7 @@ export class Dekis extends Command {
   constructor(discordClient: Discord.Client) {
     super(discordClient, 'dekis');
 
-    this.onMessage((msg) => {
+    this.onCommand((msg) => {
       msg.channel.send('', { files: [path.resolve('static/images/dekis.jpg')] });
     });
   }

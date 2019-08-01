@@ -8,7 +8,7 @@ export class Release extends Command {
   constructor(discordClient: Discord.Client) {
     super(discordClient, 'release');
 
-    this.onMessage(async (msg) => {
+    this.onCommand(async (msg) => {
       const now = moment();
       const releaseDate = moment(this.releaseDate);
       const diff = releaseDate.diff(now);

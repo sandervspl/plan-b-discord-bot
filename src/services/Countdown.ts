@@ -1,6 +1,7 @@
 import Discord from 'discord.js';
 import moment from 'moment';
 import { CronJob } from 'cron';
+import env from 'helpers/env';
 
 export class Countdown {
   private releaseDate = moment('2019-08-27');
@@ -9,7 +10,7 @@ export class Countdown {
   constructor(
     private discordClient: Discord.Client
   ) {
-    if (process.env.APP_ENV === 'production') {
+    if (env.isProduction) {
       this.channel = this.discordClient.channels.get('497799504540598282'); // general
     } else {
       this.channel = this.discordClient.channels.get('561859968681115658'); // testing

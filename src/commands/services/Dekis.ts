@@ -7,7 +7,11 @@ export class Dekis extends Command {
     super(discordClient, 'dekis');
 
     this.onCommand((msg) => {
-      msg.channel.send('', { files: [path.resolve('static/images/dekis.jpg')] });
+      try {
+        msg.channel.send('', { files: [path.resolve('static/images/dekis.jpg')] });
+      } catch (err) {
+        this.onError(msg, err);
+      }
     });
   }
 }

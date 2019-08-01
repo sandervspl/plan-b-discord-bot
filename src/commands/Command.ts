@@ -21,6 +21,7 @@ export default abstract class Command {
     };
   }
 
+
   protected onCommand = (cb: CommandCallback) => this.client.on('message', (msg) => {
     if (env.isDevelopment && !this.isFromDeveloper(msg)) {
       return;
@@ -61,6 +62,13 @@ export default abstract class Command {
 
   protected getArgs = (content: string): string[] => {
     return content.split(' ').slice(1);
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  protected onError = (msg: Discord.Message, err: any) => {
+    msg.channel.send('😅 You broke the bot. Blame Misa.');
+
+    console.error(`Error '${this.listen}':`, err);
   }
 
 

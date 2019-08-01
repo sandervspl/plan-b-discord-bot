@@ -14,12 +14,12 @@ export class Sound extends Command {
   constructor(discordClient: Discord.Client) {
     super(discordClient, 'sound', { cooldown: 5000 });
 
+    const sortedFileCommands = Object.keys(this.files)
+      .sort()
+      .join(', ');
+
     this.onCommand((msg, [request]) => {
       if (!request) {
-        const sortedFileCommands = Object.keys(this.files)
-          .sort()
-          .join(', ');
-
         return msg.channel.send(`Available sound files: ${sortedFileCommands}`);
       }
 
@@ -30,7 +30,7 @@ export class Sound extends Command {
       try {
         msg.channel.send('', { files: [this.files[request]] });
       } catch (err) {
-        msg.channel.send('😅 Ah fuck, something went wrong.');
+        this.onError(msg, err);
       }
     });
   }

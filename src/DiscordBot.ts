@@ -1,5 +1,5 @@
 import Discord from 'discord.js';
-import messages from './commands/services';
+import commands from './commands/services';
 import services from './services';
 
 class DiscordBot {
@@ -12,7 +12,7 @@ class DiscordBot {
       console.info('Discord bot activated.');
 
       this.initServices();
-      this.initMessageServices();
+      this.initCommands();
     });
   }
 
@@ -20,8 +20,8 @@ class DiscordBot {
     services.forEach((services) => new services(this.client));
   }
 
-  private initMessageServices = () => {
-    messages.forEach((message) => new message(this.client));
+  private initCommands = () => {
+    commands.forEach((command) => new command(this.client));
   }
 }
 

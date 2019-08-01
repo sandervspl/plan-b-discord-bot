@@ -2,7 +2,7 @@ import Discord from 'discord.js';
 import moment from 'moment';
 import _ from 'lodash';
 import env from 'helpers/env';
-import { Options, MessageCallback } from './types';
+import { Options, CommandCallback } from './types';
 
 export default abstract class Command {
   private cooldowns = new Discord.Collection();
@@ -21,7 +21,7 @@ export default abstract class Command {
     };
   }
 
-  protected onCommand = (cb: MessageCallback) => this.client.on('message', (msg) => {
+  protected onCommand = (cb: CommandCallback) => this.client.on('message', (msg) => {
     if (env.isDevelopment && !this.isFromDeveloper(msg)) {
       return;
     }

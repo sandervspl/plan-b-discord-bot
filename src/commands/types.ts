@@ -5,6 +5,6 @@ export type MessageCallback = (msg: Discord.Message, args: string[]) => void;
 export type Roles = 'guild officer' | 'guild master' | 'bot' | 'discord admin';
 
 export type Options = {
-  cooldown?: number;
+  cooldown: number;
   roles?: Roles[];
 }

@@ -6,14 +6,20 @@ import { Options, MessageCallback } from './types';
 
 export default abstract class Command {
   private cooldowns = new Discord.Collection();
+  private readonly options: Options = {
+    cooldown: 3000,
+  };
 
   constructor(
     protected readonly client: Discord.Client,
     protected readonly listen: string,
-    protected readonly options: Options = {
-      cooldown: 3000,
-    },
-  ) {}
+    options: Options,
+  ) {
+    this.options = {
+      ...this.options,
+      ...options,
+    };
+  }
 
   protected onCommand = (cb: MessageCallback) => this.client.on('message', (msg) => {
     if (env.isDevelopment && !this.isFromDeveloper(msg)) {
@@ -80,6 +86,6 @@ export default abstract class Command {
 
     this.cooldowns.set(this.listen, now);
 
-    setTimeout(() => this.cooldowns.delete(this.listen), this.options.cooldown!);
+    setTimeout(() => this.cooldowns.delete(this.listen), this.options.cooldown);
   }
 }

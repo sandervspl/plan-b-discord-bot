@@ -6,10 +6,14 @@ import Command from '../Command';
 export class Sound extends Command {
   private readonly files = fs
     .readdirSync(path.resolve('static/audio'))
-    .reduce((prev, cur) => ({
-      ...prev,
-      [cur.split('.')[0]]: path.resolve('static/audio', cur),
-    }), {} as Record<string, string>);
+    .reduce((prev, cur) => {
+      const fileName = cur.split('.')[0];
+
+      return {
+        ...prev,
+        [fileName]: path.resolve('static/audio', cur),
+      };
+    }, {} as Record<string, string>);
 
   constructor(discordClient: Discord.Client) {
     super(discordClient, 'sound', { cooldown: 5000 });

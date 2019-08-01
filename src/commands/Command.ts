@@ -12,7 +12,7 @@ export default abstract class Command {
 
   constructor(
     protected readonly client: Discord.Client,
-    protected readonly listen: string,
+    public readonly listen: string,
     options?: Options,
   ) {
     this.options = {

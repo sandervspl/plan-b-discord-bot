@@ -19,7 +19,7 @@ export class SetClass extends Command {
 
     this.onCommand(async (msg, args) => {
       const { availableRoles } = this;
-      const request = args[0] as keyof typeof availableRoles;
+      const request = args[0].toLowerCase().trim() as keyof typeof availableRoles;
       const classNames = Object.keys(availableRoles).sort();
 
       if (!request) {

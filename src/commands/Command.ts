@@ -27,6 +27,10 @@ export default abstract class Command {
       return;
     }
 
+    if (env.isProduction && msg.channel.id === '561859968681115658') {
+      return;
+    }
+
     // Clean up message
     const content = msg.content
       .toLowerCase()

@@ -1,20 +1,16 @@
 import Discord from 'discord.js';
 import moment from 'moment';
 import { CronJob } from 'cron';
-import env from 'helpers/env';
 
 export class Countdown {
   private releaseDate = moment('2019-08-27');
-  private channel: Discord.Channel | undefined;
+  private channel: Discord.TextChannel | undefined;
 
   constructor(
     private discordClient: Discord.Client
   ) {
-    if (env.isProduction) {
-      this.channel = this.discordClient.channels.get('497799504540598282'); // general
-    } else {
-      this.channel = this.discordClient.channels.get('561859968681115658'); // testing
-    }
+    // general
+    this.channel = this.discordClient.channels.get('497799504540598282') as Discord.TextChannel;
 
     if (this.channel) {
       this.initCountdown();
@@ -34,7 +30,6 @@ export class Countdown {
       const diff = this.getDiff(unitType);
       const plural = diff !== 1 ? 's' : '';
 
-      // @ts-ignore according to docs this is possible
       this.channel!.send(`⏰ ${diff} ${unitType}${plural} until Classic release!`);
     };
 

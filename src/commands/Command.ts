@@ -27,8 +27,15 @@ export default abstract class Command {
       return;
     }
 
-    // Testing channel
-    if (env.isProduction && msg.channel.id === '561859968681115658') {
+    if (
+      env.isProduction
+      && (
+        // Testing channel
+        msg.channel.id === '561859968681115658'
+        // Test suite channel
+        || msg.channel.id === '611163871398592521'
+      )
+    ) {
       return;
     }
 

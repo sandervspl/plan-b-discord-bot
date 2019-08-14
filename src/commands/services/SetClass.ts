@@ -3,32 +3,34 @@ import _ from 'lodash';
 import Command from '../Command';
 
 export class SetClass extends Command {
-  private availableRoles = {
-    druid: '583026145499545620',
-    hunter: '583025969195909150',
-    warrior: '583022884444700675',
-    shaman: '583023313450827786',
-    mage: '583023260128641044',
-    rogue: '583025901583990784',
-    priest: '583026016495337472',
-    warlock: '583026096359079937',
-  };
+  private availableRoles: Map<string, string> = new Map();
 
   constructor(discordClient: Discord.Client) {
     super(discordClient, 'setclass', { cooldown: 5000 });
 
+    this.availableRoles.set('druid', '583026145499545620');
+    this.availableRoles.set('hunter', '583025969195909150');
+    this.availableRoles.set('warrior', '583022884444700675');
+    this.availableRoles.set('shaman', '583023313450827786');
+    this.availableRoles.set('mage', '583023260128641044');
+    this.availableRoles.set('rogue', '583025901583990784');
+    this.availableRoles.set('priest', '583026016495337472');
+    this.availableRoles.set('warlock', '583026096359079937');
+
     this.onCommand(async (msg, args) => {
       const { availableRoles } = this;
-      const request = args[0].toLowerCase().trim() as keyof typeof availableRoles;
-      const classNames = Object.keys(availableRoles).sort();
+      let request = args[0] as keyof typeof availableRoles;
+      const classNames = new Map(Array.from(availableRoles).sort());
 
       if (!request) {
         return msg.channel.send(
-          `Available class roles: ${classNames.join(', ')}`
+          `Available class roles: ${Array.from(classNames.keys()).join(', ')}`
         );
       }
 
-      if (!classNames.includes(request)) {
+      request = request.toLowerCase().trim() as keyof typeof availableRoles;
+
+      if (!classNames.has(request)) {
         return msg.channel.send('This class role is not available.');
       }
 
@@ -42,10 +44,16 @@ export class SetClass extends Command {
       }
 
       try {
-        await msg.member.addRole(availableRoles[request]);
+        const role = availableRoles.get(request);
 
-        const dm = await msg.author.createDM();
-        dm.send(`Class role set to '${request}'`);
+        if (role) {
+          await msg.member.addRole(role);
+
+          const dm = await msg.author.createDM();
+          dm.send(`Class role set to '${request}'`);
+        } else {
+          this.onError(msg, '😢 Something went wrong when trying to add your new role.');
+        }
       } catch (err) {
         this.onError(msg, err);
       }

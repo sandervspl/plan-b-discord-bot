@@ -6,7 +6,8 @@ dotenv.config();
 
 const app = express();
 const PORT_DEFAULT = 5000;
+const PORT = Number(process.env.PORT) || PORT_DEFAULT;
 
-app.listen(Number(process.env.PORT) || PORT_DEFAULT, () => {
+app.listen(PORT, () => {
   new DiscordBot();
 });

@@ -9,7 +9,9 @@
     "start": "node -r ./tsconfig-paths-bootstrap.js dist/index.js",
     "clean": "rimraf dist/",
     "lint": "eslint --ext .ts --ext .tsx src/",
-    "test": "jest"
+    "test": "clear && jest --verbose",
+    "test:watch": "npm test -- --watch",
+    "test:cov": "npm test -- --coverage"
   },
   "keywords": [],
   "author": "Sander Vispoel <contact@sandervispoel.com>",

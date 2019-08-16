@@ -5,6 +5,7 @@ import { Sound } from './Sound';
 import { Dekis } from './Dekis';
 import { Commands } from './Commands';
 import { SetClass } from './SetClass';
+import { Misa } from './Misa';
 
 export default [
   Ping,
@@ -14,4 +15,5 @@ export default [
   Dekis,
   Commands,
   SetClass,
+  Misa,
 ] as const;

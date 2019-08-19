@@ -38,10 +38,10 @@ export class Countdown {
 
   public initCountdown = () => {
     // Until the 25th of August, every 07:00 hour
-    const cronCountdownDays = this.generateCronJob('0 0 7 * 0-7 *', 'day');
+    const cronCountdownDays = this.generateCronJob('0 0 7 0-25 0-7 *', 'day');
 
     // On 26th of August, every hour on the clock
-    const cronCountdownHours = this.generateCronJob('0 0 0-23 26 7 *', 'hour');
+    const cronCountdownHours = this.generateCronJob('0 0 8-23 26 7 *', 'hour');
 
     // On 26th of August, every minute from 23:50 to 23:59
     const cronCountdownMinutes = this.generateCronJob('0 50-59 23 26 7 *', 'minute');

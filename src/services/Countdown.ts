@@ -27,7 +27,8 @@ export class Countdown {
 
   private generateCronJob = (cronTime: string, unitType: moment.unitOfTime.Diff) => {
     const onTick = () => {
-      const diff = this.getDiff(unitType);
+      const offset = unitType === 'day' ? 1 : 0;
+      const diff = this.getDiff(unitType) + offset;
       const plural = diff !== 1 ? 's' : '';
 
       this.channel!.send(`⏰ ${diff} ${unitType}${plural} until Classic release!`);

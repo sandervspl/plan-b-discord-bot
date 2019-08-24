@@ -41,16 +41,20 @@ export class Countdown {
     const cronCountdownDays = this.generateCronJob('0 0 7 0-25 0-7 *', 'day');
 
     // On 26th of August, every hour on the clock
-    const cronCountdownHours = this.generateCronJob('0 0 8-23 26 7 *', 'hour');
+    const cronCountdownHours = this.generateCronJob('0 0 7-23 26 7 *', 'hour');
 
     // On 26th of August, every minute from 23:50 to 23:59
     const cronCountdownMinutes = this.generateCronJob('0 50-59 23 26 7 *', 'minute');
+
+    // On 26th of August, every second from 23:59:50 to 23:59:59
+    const cronCountdownSeconds = this.generateCronJob('50-59 59 23 26 7 *', 'second');
 
     // On 27th of August, at 00:00:00, stop the countdown cron jobs
     new CronJob('0 0 0 27 7 *', () => {
       cronCountdownDays.stop();
       cronCountdownHours.stop();
       cronCountdownMinutes.stop();
+      cronCountdownSeconds.stop();
 
       // @ts-ignore according to docs this is possible
       this.channel!.send('Classic is live! Have fun fuckers!!!');

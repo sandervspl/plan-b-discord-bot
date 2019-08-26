@@ -27,7 +27,7 @@ export class Countdown {
 
   private generateCronJob = (cronTime: string, unitType: moment.unitOfTime.Diff) => {
     const onTick = () => {
-      const offset = unitType === 'day' ? 1 : 0;
+      const offset = 1; // Because of milliseconds it will drop down 1 unit too low
       const diff = this.getDiff(unitType) + offset;
       const plural = diff !== 1 ? 's' : '';
 

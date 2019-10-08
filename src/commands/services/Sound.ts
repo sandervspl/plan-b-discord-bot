@@ -5,25 +5,16 @@ import Command from '../Command';
 
 export class Sound extends Command {
   private readonly files = new Map<string, string>();
+  private sortedFileCommands = '';
 
   constructor(discordClient: Discord.Client) {
     super(discordClient, 'sound', { cooldown: 5000 });
 
-    fs
-      .readdirSync(path.resolve('static/audio'))
-      .forEach((fileName) => {
-        const fileNameWithoutExt = fileName.split('.')[0];
-
-        this.files.set(fileNameWithoutExt, path.resolve('static/audio', fileName));
-      });
-
-    const sortedFileCommands = Array.from(this.files.keys())
-      .sort()
-      .join(', ');
+    this.initSoundFiles();
 
     this.onCommand((msg, [request]) => {
       if (!request) {
-        return msg.channel.send(`Available sound files: ${sortedFileCommands}`);
+        return msg.channel.send(`Available sound files: ${this.sortedFileCommands}`);
       }
 
       if (!this.files.has(request)) {
@@ -42,5 +33,20 @@ export class Sound extends Command {
         this.onError(msg, err);
       }
     });
+  }
+
+  // Search through static directory for audio files and store in memory
+  private initSoundFiles = () => {
+    fs
+      .readdirSync(path.resolve('static/audio'))
+      .forEach((fileName) => {
+        const fileNameWithoutExt = fileName.split('.')[0];
+
+        this.files.set(fileNameWithoutExt, path.resolve('static/audio', fileName));
+      });
+
+    this.sortedFileCommands = Array.from(this.files.keys())
+      .sort()
+      .join(', ');
   }
 }

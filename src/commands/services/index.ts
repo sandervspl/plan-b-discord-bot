@@ -6,6 +6,7 @@ import { Dekis } from './Dekis';
 import { Commands } from './Commands';
 import { SetClass } from './SetClass';
 import { Misa } from './Misa';
+import { ClassPoll } from './ClassPoll';
 
 export default [
   Ping,
@@ -16,4 +17,5 @@ export default [
   Commands,
   SetClass,
   Misa,
+  ClassPoll,
 ] as const;

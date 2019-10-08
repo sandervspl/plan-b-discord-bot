@@ -10,12 +10,12 @@ export class SetClass extends Command {
 
     this.availableRoles.set('druid', '583026145499545620');
     this.availableRoles.set('hunter', '583025969195909150');
-    this.availableRoles.set('warrior', '583022884444700675');
-    this.availableRoles.set('shaman', '583023313450827786');
     this.availableRoles.set('mage', '583023260128641044');
-    this.availableRoles.set('rogue', '583025901583990784');
     this.availableRoles.set('priest', '583026016495337472');
+    this.availableRoles.set('rogue', '583025901583990784');
+    this.availableRoles.set('shaman', '583023313450827786');
     this.availableRoles.set('warlock', '583026096359079937');
+    this.availableRoles.set('warrior', '583022884444700675');
 
     this.onCommand(async (msg, args) => {
       const { availableRoles } = this;

@@ -17,9 +17,14 @@ export class ClassPoll extends Command {
         .channel
         .send('Select your class to give yourself the class role.') as Discord.Message;
 
-      ClassPollService.reactionIds.forEach((_, reactionId) => {
-        pollMsg.react(reactionId);
-      });
+      const reactionIds = Array.from(ClassPollService.reactionIds.keys());
+
+      Promise.all(
+        reactionIds.map((reactionId) => pollMsg.react(reactionId))
+      )
+        .catch((err) => {
+          console.error('Error while reacting to class poll', err);
+        });
     });
   }
 }

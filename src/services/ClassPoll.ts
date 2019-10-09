@@ -73,6 +73,10 @@ export class ClassPollService {
     // @ts-ignore
     const message: Discord.Message = await channel.fetchMessage(data.message_id);
 
+    if (!message.content.includes('Select your class')) {
+      return;
+    }
+
     const user = message.guild.members.find((member) => member.id === data.user_id);
 
     if (!user) {

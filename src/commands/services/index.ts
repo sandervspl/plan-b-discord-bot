@@ -8,6 +8,7 @@ import { SetClass } from './SetClass';
 import { Misa } from './Misa';
 import { ClassPoll } from './ClassPoll';
 import { Ruten } from './Ruten';
+import { Fullcream } from './Fullcream';
 
 export default [
   Ping,
@@ -20,4 +21,5 @@ export default [
   Misa,
   ClassPoll,
   Ruten,
+  Fullcream,
 ] as const;

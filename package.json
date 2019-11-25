@@ -1,6 +1,6 @@
 {
   "name": "plan-b-discord-bot",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Code for plan-b discord bot",
   "main": "index.js",
   "scripts": {

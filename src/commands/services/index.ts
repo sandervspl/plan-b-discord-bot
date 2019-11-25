@@ -7,6 +7,7 @@ import { Commands } from './Commands';
 import { SetClass } from './SetClass';
 import { Misa } from './Misa';
 import { ClassPoll } from './ClassPoll';
+import { Ruten } from './Ruten';
 
 export default [
   Ping,
@@ -18,4 +19,5 @@ export default [
   SetClass,
   Misa,
   ClassPoll,
+  Ruten,
 ] as const;

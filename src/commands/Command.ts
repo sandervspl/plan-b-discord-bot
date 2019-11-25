@@ -1,12 +1,13 @@
 import Discord from 'discord.js';
 import moment from 'moment';
 import _ from 'lodash';
+import { O } from 'ts-toolbelt';
 import env from 'helpers/env';
 import { Options, CommandCallback } from './types';
 
 export default abstract class Command {
   private cooldowns = new Discord.Collection();
-  private readonly options: Options = {
+  private readonly options: O.Required<Options, 'cooldown'> = {
     cooldown: 3000,
   };
 

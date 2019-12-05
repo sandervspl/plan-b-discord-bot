@@ -9,6 +9,7 @@ import { Misa } from './Misa';
 import { ClassPoll } from './ClassPoll';
 import { Ruten } from './Ruten';
 import { Fullcream } from './Fullcream';
+import { Fyrn } from './Fyrn';
 
 export default [
   Ping,
@@ -22,4 +23,5 @@ export default [
   ClassPoll,
   Ruten,
   Fullcream,
+  Fyrn,
 ] as const;

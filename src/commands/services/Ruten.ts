@@ -6,10 +6,10 @@ export class Ruten extends Command {
   constructor(discordClient: Discord.Client) {
     super(discordClient, 'ruten');
 
-    // Random img
-    const num = 1 + Math.round(Math.random() * 1);
-
     this.onCommand((msg) => {
+      // Random img
+      const num = 1 + Math.round(Math.random() * 1);
+
       try {
         msg.channel.send('', { files: [path.resolve(`static/images/ruten${num}.jpg`)] });
       } catch (err) {

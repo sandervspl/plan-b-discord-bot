@@ -80,7 +80,7 @@ sed "s/NAME/$PROJECT/g; s/port/$PORT/g; s/app_env/$APP_ENV/g; s/PROJECT/$PROJECT
 
 #Build tar and copy to server
 echo -e "🚚 $c Copying files to server $nc"
-tar -czf $FILENAME ./dist ./static ./package.json ./package-lock.json ./tsconfig-paths-bootstrap.js ./tsconfig.json ./$PM2_CONFIG_NAME ./.secretenv
+tar -czf $FILENAME ./dist ./static ./package.json ./package-lock.json ./tsconfig-paths-bootstrap.js ./tsconfig.json ./$PM2_CONFIG_NAME ./.env
 scp -r ./$FILENAME $USER@$HOST:~
 rm ./$FILENAME
 rm ./$PM2_CONFIG_NAME
@@ -98,7 +98,6 @@ ssh $USER@$HOST << EOF
     echo -e "👀 $c Extracting files $nc"
     tar -zxvf $PDIR-$VERSION/$FILENAME -C $PDIR-$VERSION;
     rm $PDIR-$VERSION/$FILENAME;
-    mv $PDIR-$VERSION/.secretenv $PDIR-$VERSION/.env;
     echo -e "⚡️ $c Installing packages $nc"
     . /home/sandervspl/.nvm/nvm.sh;
     npm install --production --prefix $PDIR-$VERSION;

@@ -11,6 +11,14 @@ class DiscordBot {
     this.client.on('ready', () => {
       console.info('Discord bot activated.');
 
+      this.client.user.setStatus('online');
+      this.client.user.setPresence({
+        game: {
+          name: '!commands',
+          type: 'LISTENING',
+        },
+      });
+
       this.initServices();
       this.initCommands();
     });

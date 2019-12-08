@@ -10,6 +10,7 @@ import { ClassPoll } from './ClassPoll';
 import { Ruten } from './Ruten';
 import { Fullcream } from './Fullcream';
 import { Fyrn } from './Fyrn';
+import { Grifonta } from './Grifonta';
 
 export default [
   Ping,
@@ -24,4 +25,5 @@ export default [
   Ruten,
   Fullcream,
   Fyrn,
+  Grifonta,
 ] as const;

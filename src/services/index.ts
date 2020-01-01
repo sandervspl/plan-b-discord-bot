@@ -1,7 +1,7 @@
-import { Countdown } from './Countdown';
+// import { Countdown } from './Countdown';
 import { ClassPollService } from './ClassPoll';
 
 export default [
-  Countdown,
+  // Countdown,
   ClassPollService,
 ] as const;

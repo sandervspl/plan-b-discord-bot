@@ -11,6 +11,7 @@ import { Ruten } from './Ruten';
 import { Fullcream } from './Fullcream';
 import { Fyrn } from './Fyrn';
 import { Grifonta } from './Grifonta';
+import { Origin } from './Origin';
 
 export default [
   Ping,
@@ -26,4 +27,5 @@ export default [
   Fullcream,
   Fyrn,
   Grifonta,
+  Origin,
 ] as const;

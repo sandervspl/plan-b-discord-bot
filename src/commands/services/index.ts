@@ -12,6 +12,7 @@ import { Fullcream } from './Fullcream';
 import { Fyrn } from './Fyrn';
 import { Grifonta } from './Grifonta';
 import { Origin } from './Origin';
+import { Blackkakari } from './Blackkakari';
 
 export default [
   Ping,
@@ -28,4 +29,5 @@ export default [
   Fyrn,
   Grifonta,
   Origin,
+  Blackkakari,
 ] as const;
